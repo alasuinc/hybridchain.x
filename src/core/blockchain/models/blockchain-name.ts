@@ -5,9 +5,7 @@ export const TEST_EVM_BLOCKCHAIN_NAME = {
     FUJI: 'FUJI',
     SCROLL_SEPOLIA: 'SCROLL_SEPOLIA'
 } as const;
-
-export const EVM_BLOCKCHAIN_NAME = {
-    ...TEST_EVM_BLOCKCHAIN_NAME,
+export const MAIN_EVM_BLOCKCHAIN_NAME = {
     ETHEREUM: 'ETH',
     BINANCE_SMART_CHAIN: 'BSC',
     POLYGON: 'POLYGON',
@@ -51,8 +49,12 @@ export const EVM_BLOCKCHAIN_NAME = {
     MANTLE: 'MANTLE'
 } as const;
 
-export const BLOCKCHAIN_NAME = {
-    ...EVM_BLOCKCHAIN_NAME,
+export const EVM_BLOCKCHAIN_NAME = {
+    ...TEST_EVM_BLOCKCHAIN_NAME,
+    ...MAIN_EVM_BLOCKCHAIN_NAME
+} as const;
+
+const NON_EVM_BLOCKCHAIN_NAME = {
     SOLANA: 'SOLANA',
     NEAR: 'NEAR',
     BITCOIN: 'BITCOIN',
@@ -131,6 +133,11 @@ export const BLOCKCHAIN_NAME = {
     XDC: 'XDC'
 } as const;
 
+export const BLOCKCHAIN_NAME = {
+    ...EVM_BLOCKCHAIN_NAME,
+    ...NON_EVM_BLOCKCHAIN_NAME
+} as const;
+
 export type BlockchainName = (typeof BLOCKCHAIN_NAME)[keyof typeof BLOCKCHAIN_NAME];
 
 export type TestnetEvmBlockchain =
@@ -141,3 +148,11 @@ export type NearBlockchainName = typeof BLOCKCHAIN_NAME.NEAR;
 export type BitcoinBlockchainName = typeof BLOCKCHAIN_NAME.BITCOIN;
 export type TronBlockchainName = typeof BLOCKCHAIN_NAME.TRON;
 export type IcpBlockchainName = typeof BLOCKCHAIN_NAME.ICP;
+
+export const MAINNET_BLOCKCHAIN_NAME = {
+    ...MAIN_EVM_BLOCKCHAIN_NAME,
+    ...NON_EVM_BLOCKCHAIN_NAME
+} as const;
+
+export type MainnetBlockchainName =
+    (typeof MAINNET_BLOCKCHAIN_NAME)[keyof typeof MAINNET_BLOCKCHAIN_NAME];
